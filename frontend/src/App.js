@@ -10,7 +10,6 @@ import {
   Toolbar, 
   IconButton,
   CircularProgress,
-  Divider,
   useMediaQuery,
   Alert,
   Snackbar
