@@ -70,6 +70,15 @@ const theme = createTheme({
   shape: {
     borderRadius: 12,
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -81,9 +90,22 @@ const theme = createTheme({
           transition: 'all 0.3s ease',
           backgroundImage: 'linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%)',
           color: '#FFFFFF',
+          '@media (max-width: 600px)': {
+            padding: '8px 16px',
+            fontSize: '0.9rem',
+          },
           '&:hover': {
             transform: 'translateY(-2px)',
             boxShadow: '0 6px 20px rgba(59, 130, 246, 0.3)',
+          },
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          '@media (max-width: 600px)': {
+            padding: '0 12px',
           },
         },
       },
@@ -94,14 +116,9 @@ const theme = createTheme({
           borderRadius: 16,
           transition: 'all 0.3s ease',
           backgroundImage: 'none',
-        },
-      },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#FFFFFF',
-          borderBottom: '1px solid #E2E8F0',
+          '@media (max-width: 600px)': {
+            borderRadius: 12,
+          },
         },
       },
     },
@@ -112,6 +129,9 @@ const theme = createTheme({
             borderRadius: 12,
             transition: 'all 0.3s ease',
             backgroundColor: '#FFFFFF',
+            '@media (max-width: 600px)': {
+              fontSize: '0.9rem',
+            },
             '&:hover': {
               transform: 'translateY(-1px)',
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
@@ -238,7 +258,13 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box className="chat-container bg-pattern" sx={{ bgcolor: 'background.default' }}>
         <AppBar position="static" elevation={0} color="inherit">
-          <Toolbar sx={{ px: { xs: 2, sm: 4 }, py: 1.5 }}>
+          <Toolbar 
+            sx={{ 
+              px: { xs: 1.5, sm: 4 }, 
+              py: { xs: 1, sm: 1.5 },
+              minHeight: { xs: '56px', sm: '64px' }
+            }}
+          >
             <Box 
               sx={{ 
                 display: 'flex', 
@@ -310,8 +336,8 @@ function App() {
           maxWidth="md" 
           sx={{ 
             flexGrow: 1, 
-            py: 3, 
-            px: { xs: 2, sm: 3 },
+            py: { xs: 2, sm: 3 }, 
+            px: { xs: 1, sm: 3 },
             display: 'flex', 
             flexDirection: 'column',
             height: '100%',
@@ -322,14 +348,14 @@ function App() {
             className="glass-effect"
             sx={{ 
               flexGrow: 1, 
-              p: { xs: 2, sm: 3 }, 
-              mb: 2, 
+              p: { xs: 1.5, sm: 3 }, 
+              mb: { xs: 1, sm: 2 }, 
               overflow: 'auto',
               display: 'flex',
               flexDirection: 'column',
               border: '1px solid',
               borderColor: 'grey.200',
-              maxHeight: 'calc(100vh - 180px)',
+              maxHeight: { xs: 'calc(100vh - 160px)', sm: 'calc(100vh - 180px)' },
               position: 'relative',
             }}
           >
@@ -484,14 +510,17 @@ function App() {
             className="glass-effect hover-effect"
             sx={{ 
               display: 'flex', 
-              gap: 2,
-              p: 2,
-              mx: { xs: 2, sm: 3 },
-              mb: 2,
-              borderRadius: 3,
+              gap: { xs: 1, sm: 2 },
+              p: { xs: 1.5, sm: 2 },
+              mx: { xs: 0, sm: 3 },
+              mb: { xs: 1, sm: 2 },
+              borderRadius: { xs: 2, sm: 3 },
               border: '1px solid',
               borderColor: 'grey.200',
-              backgroundColor: 'background.paper'
+              backgroundColor: 'background.paper',
+              position: 'sticky',
+              bottom: 0,
+              zIndex: 2,
             }}
           >
             <TextField
@@ -508,6 +537,7 @@ function App() {
                 "& .MuiOutlinedInput-root": {
                   backgroundColor: 'background.paper',
                   transition: 'all 0.2s ease',
+                  fontSize: { xs: '0.9rem', sm: '1rem' },
                   '&:hover': {
                     backgroundColor: 'background.paper',
                     '& > fieldset': {
@@ -528,29 +558,40 @@ function App() {
               color="primary"
               className="button-animate"
               endIcon={loading ? (
-                <CircularProgress size={20} color="inherit" />
+                <CircularProgress size={18} color="inherit" />
               ) : (
-                <SendIcon />
+                <SendIcon sx={{ fontSize: { xs: 18, sm: 20 } }} />
               )}
               onClick={sendMessage}
               disabled={!message.trim() || loading}
               sx={{ 
-                minWidth: '130px',
+                minWidth: { xs: '44px', sm: '130px' },
                 height: '100%',
                 alignSelf: 'flex-start',
+                p: { xs: '8px', sm: '10px 24px' },
                 transition: 'all 0.2s ease',
-                color: '#FFFFFF', // Ensure text is white
+                color: '#FFFFFF',
+                '& .MuiButton-endIcon': {
+                  ml: { xs: 0, sm: 1 },
+                },
+                '& .MuiButton-startIcon': {
+                  ml: { xs: 0, sm: 1 },
+                },
                 '&:hover': {
                   transform: 'translateY(-1px)',
                   boxShadow: '0 4px 6px rgba(59, 130, 246, 0.2)',
-                  color: '#FFFFFF', // Keep text white on hover
+                  color: '#FFFFFF',
                 },
                 '&.Mui-disabled': {
-                  color: 'rgba(255, 255, 255, 0.7)', // Light white when disabled
+                  color: 'rgba(255, 255, 255, 0.7)',
                 }
               }}
             >
-              {loading ? 'Sending...' : 'Send'}
+              {loading ? (
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Sending...</Box>
+              ) : (
+                <Box sx={{ display: { xs: 'none', sm: 'block' } }}>Send</Box>
+              )}
             </Button>
           </Paper>
         </Container>
@@ -558,24 +599,26 @@ function App() {
         <Box 
           sx={{ 
             textAlign: 'center', 
-            py: 2, 
-            px: 2,
+            py: { xs: 1.5, sm: 2 }, 
+            px: { xs: 1.5, sm: 2 },
             mt: 'auto', 
             borderTop: '1px solid',
             borderColor: 'grey.200',
             backgroundColor: 'background.paper',
             opacity: 0.9,
-            backgroundImage: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9))'
+            backgroundImage: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.9))',
+            fontSize: { xs: '0.75rem', sm: '0.875rem' }
           }}
         >
           <Typography 
             variant="body2" 
             sx={{ 
               color: 'text.secondary',
-              fontWeight: 500
+              fontWeight: 500,
+              fontSize: 'inherit'
             }}
           >
-            © {new Date().getFullYear()} AI Innovate Solutions | Your Premier AI Software Agency
+            © {new Date().getFullYear()} AI Innovate Solutions
           </Typography>
         </Box>
 
@@ -584,6 +627,14 @@ function App() {
           autoHideDuration={6000} 
           onClose={handleCloseSnackbar}
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          sx={{
+            '& .MuiSnackbarContent-root': {
+              '@media (max-width: 600px)': {
+                margin: '8px',
+                width: 'calc(100% - 16px)',
+              },
+            },
+          }}
         >
           <Alert 
             onClose={handleCloseSnackbar} 
