@@ -560,19 +560,22 @@ function App() {
               endIcon={loading ? (
                 <CircularProgress size={18} color="inherit" />
               ) : (
-                <SendIcon sx={{ fontSize: { xs: 18, sm: 20 } }} />
+                <SendIcon sx={{ fontSize: { xs: 20, sm: 20 } }} />
               )}
               onClick={sendMessage}
               disabled={!message.trim() || loading}
               sx={{ 
-                minWidth: { xs: '44px', sm: '130px' },
-                height: '100%',
-                alignSelf: 'flex-start',
-                p: { xs: '8px', sm: '10px 24px' },
+                minWidth: { xs: '48px', sm: '130px' },
+                width: { xs: '48px', sm: 'auto' },
+                height: { xs: '48px', sm: '100%' },
+                p: { xs: '12px', sm: '10px 24px' },
+                borderRadius: { xs: '12px', sm: '12px' },
+                alignSelf: 'center',
                 transition: 'all 0.2s ease',
                 color: '#FFFFFF',
                 '& .MuiButton-endIcon': {
                   ml: { xs: 0, sm: 1 },
+                  mr: { xs: 0 },
                 },
                 '& .MuiButton-startIcon': {
                   ml: { xs: 0, sm: 1 },
