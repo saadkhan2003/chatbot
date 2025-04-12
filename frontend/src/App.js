@@ -323,6 +323,48 @@ function App() {
               </Box>
             </Box>
             <Box sx={{ flexGrow: 1 }} />
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: 2,
+                mr: 2
+              }}
+            >
+              <Typography
+                variant="body2"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                  color: 'text.secondary',
+                  fontWeight: 500
+                }}
+              >
+                Sample Projects:
+              </Typography>
+              <Typography
+                variant="body2"
+                sx={{
+                  display: { xs: 'none', sm: 'block' },
+                }}
+              >
+                <a 
+                  href="https://instacaptiongenerator.onrender.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    color: '#3B82F6', 
+                    textDecoration: 'none', 
+                    fontWeight: 500,
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      color: '#2563EB'
+                    }
+                  }}
+                >
+                  InstaCaption Generator
+                </a>
+              </Typography>
+            </Box>
             <IconButton 
               className="button-animate"
               onClick={clearChat}
