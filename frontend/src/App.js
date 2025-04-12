@@ -407,7 +407,15 @@ function App() {
                   }}
                 >
                   I'm your AI assistant, ready to help with AI app development, 
-                  chatbot solutions, and machine learning services. How can I assist you today?
+                  chatbot solutions, and machine learning services. You can also try this project live at{' '}
+                  <a 
+                    href="https://instacaptiongenerator.onrender.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ color: '#3B82F6', textDecoration: 'none', fontWeight: 500 }}
+                  >
+                    instacaptiongenerator.onrender.com
+                  </a>
                 </Typography>
               </Box>
             ) : (
@@ -621,7 +629,15 @@ function App() {
               fontSize: 'inherit'
             }}
           >
-            © {new Date().getFullYear()} AI Innovate Solutions
+            © {new Date().getFullYear()} AI Innovate Solutions |{' '}
+            <a 
+              href="https://instacaptiongenerator.onrender.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: '#3B82F6', textDecoration: 'none', fontWeight: 500 }}
+            >
+              Try it live
+            </a>
           </Typography>
         </Box>
 
